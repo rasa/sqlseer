@@ -1,0 +1,7 @@
+*.bz2
+*.gz
+*.loaded
+*.sql
+*.tar
+employees_db/
+sakila-db/

@@ -1,0 +1,124 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "2581aebbaeb5b544dba309a3ea2e4f95",
+    "packages": [
+        {
+            "name": "pear/ole",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rasa/OLE.git",
+                "reference": "ded653033ec5203ebaf4028528d1d38e8861c5ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rasa/OLE/zipball/ded653033ec5203ebaf4028528d1d38e8861c5ad",
+                "reference": "ded653033ec5203ebaf4028528d1d38e8861c5ad",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=4.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "OLE": ""
+                },
+                "classmap": [
+                    "OLE/"
+                ]
+            },
+            "include-path": [
+                ""
+            ],
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Carsten Schmitz"
+                },
+                {
+                    "name": "Xavier Noguer"
+                }
+            ],
+            "description": "Package for reading and writing OLE containers",
+            "homepage": "https://github.com/pear/OLE",
+            "keywords": [
+                "OLE"
+            ],
+            "support": {
+                "source": "https://github.com/rasa/OLE/tree/master"
+            },
+            "time": "2013-04-13 18:11:22"
+        },
+        {
+            "name": "pear/spreadsheet_excel_writer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rasa/Spreadsheet_Excel_Writer.git",
+                "reference": "ad73f53e7f89b756f794245f8caf3195d2fd993c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rasa/Spreadsheet_Excel_Writer/zipball/ad73f53e7f89b756f794245f8caf3195d2fd993c",
+                "reference": "ad73f53e7f89b756f794245f8caf3195d2fd993c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=4.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Spreadsheet": ""
+                },
+                "classmap": [
+                    "Spreadsheet/"
+                ]
+            },
+            "include-path": [
+                ""
+            ],
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Carsten Schmitz"
+                },
+                {
+                    "name": "Xavier Noguer"
+                }
+            ],
+            "description": "Package for generating Excel spreadsheets",
+            "homepage": "https://github.com/pear/Spreadsheet_Excel_Writer",
+            "keywords": [
+                "Spreadsheet"
+            ],
+            "support": {
+                "source": "https://github.com/rasa/Spreadsheet_Excel_Writer/tree/master"
+            },
+            "time": "2013-04-13 18:12:12"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "pear/ole": 20,
+        "pear/spreadsheet_excel_writer": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.3.3",
+        "ext-curl": "*"
+    },
+    "platform-dev": []
+}

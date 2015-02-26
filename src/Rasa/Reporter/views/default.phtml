@@ -1,0 +1,170 @@
+<?php
+/**
+ * Rasa Framework
+ *
+ * @copyright Copyright (c) 2010-2015 Ross Smith II (http://smithii.com)
+ * @license   MIT License (http://opensource.org/licenses/MIT)
+ */
+
+$vars = (array) $this;
+extract($vars);
+
+$url = $_SERVER['REQUEST_URI'];
+$parts = parse_url($url);
+if (isset($parts['query'])) {
+  parse_str($parts['query'], $qs);
+} else {
+  $qs = array();
+}
+unset($qs['d']);
+
+$url = $parts['path'];
+if ($qs) {
+  $url .= '?' . http_build_query($qs);
+}
+
+$url = 'http://' . $_SERVER['HTTP_HOST'] . $url;
+
+# all chars:
+# !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+# remove #&
+# !"$%'()*+,-./:;<=>?@[\]^_`{|}~
+$mapchars = '!"$%\'()*+,-./:;<=>?@[\]^_`{|}~';
+
+for ($i = 0; $i < strlen($mapchars); ++$i) {
+  $c = $mapchars[$i];
+  $url = preg_replace(sprintf('/%%%02X/i', ord($c)), $c, $url);
+}
+
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><?= $titles ?></title>
+    <link rel="stylesheet" href="/default.css" type="text/css" />
+  </head>
+
+  <body>
+    <form id='form1' method='GET' onsubmit='return onsubmit1(this)'>
+      <?= $hiddens ?>
+      <div id='top' class="header">
+        <?= $links ?>
+        <input type='hidden' name='d' value=''/>
+        <input type='checkbox' name='d' title='Turn on debugging' style='float:right' <?= $d_checked ?>/>
+        <div style='float:right'>
+          <img valign='bottom' src='/default.png' alt=''/>
+        </div>
+        <hr/>
+        <button name='go' value='go'>Go!</button
+        ><button name='go' value='first'  title='Go to first page'<?= $first_disabled ?>>|&lt;&lt;</button
+        ><button name='go' value='prev10' title='Go back 10 pages'<?= $prev10_disabled ?>>&lt;&lt;</button
+        ><button name='go' value='prev'   title='Go to previous page'<?= $prev_disabled ?>>&lt;</button>
+        Page
+        <input
+          type='text'
+          id='page'
+          name='page'
+          value='<?= $page ?>'
+          size='1'
+          maxlength='10'
+          placeholder='page#'
+          style='text-align:right'
+          title='Enter the page number to go to'
+        />
+        <?= $ofpages ?>
+        <button name='go' value='next'   title='Go to next page'<?= $next_disabled ?>>&gt;</button
+        ><button name='go' value='next10' title='Go ahead 10 pages'<?= $next10_disabled ?>>&gt;&gt;</button
+        ><button name='go' value='last'   title='Go to last page'<?= $last_disabled ?>>&gt;&gt;|</button>
+
+        Group By:
+
+          <select name='groupby' id='groupby' <?= $groupby_disabled  ?>>
+            <?= $groupby ?>
+          </select>
+<!--
+        Totals:
+
+          <select name='totals' id='totals' <?= $totals_disabled  ?>>
+            <?= $totals ?>
+          </select>
+-->
+        Subtotals:
+
+          <select name='subtotals' id='subtotals' <?= $subtotals_disabled  ?>>
+            <?= $subtotals ?>
+          </select>
+
+        Rows:
+
+          <input
+            type='text'
+            id='rows'
+            name='rows'
+            value='<?= $rows ?>'
+            size='1'
+            maxlength='6'
+            placeholder='#rows'
+            title='Enter the number or rows to display on this page'
+            style='text-align:right'
+          />
+
+        <select name='format' id='format'>
+          <?= $save_as ?>
+        </select>
+
+        <button name='go' value='go'>Go!</button>
+
+        <button name='restart' value='restart'>Reset</button>
+
+        <hr/>
+      </div>
+      <div class="report">
+        <h1><?= $title ?></h1>
+        <table>
+          <?= $table ?>
+        </table>
+
+        <a href="#top" title="Jump to the top of the page"<?= $top_style ?>>&#x2934;</a> <span id='eop'></span>
+      </div>
+    </form>
+<form>
+<textarea readonly="readonly" cols="<?= strlen($url); ?>" rows="1">
+<?= htmlspecialchars($url); ?>
+</textarea>
+</form>
+<?= $footer ?>
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" async='async'></script>
+    <script type="text/javascript">
+//<![CDATA[
+function onsubmit1(thiz)
+{
+  try {
+    var format = $('#format');
+
+    if (format && format.val() > '') {
+      return true
+    }
+
+    $(thiz).find(':input').each(
+      function()
+      {
+        if (!$(this).val()) {
+          $(this).attr('disabled', true)
+        }
+        if (this.name == 'page' && $(this).val() == 1) {
+          $(this).attr('disabled', true)
+        }
+        if (this.name == 'rows' && $(this).val() == <?= $defaultRows ?>) {
+          $(this).attr('disabled', true)
+        }
+      }
+    )
+  } catch (e) {}
+
+  return true
+}
+//]]>
+    </script>
+  </body>
+</html>

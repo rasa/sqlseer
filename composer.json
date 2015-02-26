@@ -1,0 +1,45 @@
+{
+    "name": "rasa/sqlseer",
+    "authors": [
+        {
+            "name": "Ross Smith II",
+            "email": "ross@smithii.com",
+            "homepage": "http://smithii.com/",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Rasa_": "src/",
+            "": "src/"
+        }
+    },
+    "config": {
+        "vendor-dir": "vendor"
+    },
+    "description": "SQL data viewer/exporter",
+    "homepage": "https://github.com/rasa/sqlseer",
+    "include-path": ["src/"],
+    "keywords": ["sql", "view", "export"],
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "http://github.com/rasa/Spreadsheet_Excel_Writer",
+            "via": "http://github.com/pear/Spreadsheet_Excel_Writer"
+        },
+        {
+            "type": "vcs",
+            "url": "http://github.com/rasa/OLE",
+            "via": "http://github.com/pear/OLE"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "ext-curl": "*",
+        "pear/ole": "dev-master",
+        "pear/spreadsheet_excel_writer": "dev-master"
+    },
+    "type": "library"
+}
