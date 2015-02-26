@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Copyright (c) 2010-2015 Ross Smith II. MIT Licensed.
+
 WGET?=wget --no-check-certificate --tries 99999
 MYSQL?=mysql
 
@@ -9,6 +11,7 @@ FILL_HELP_TABLES_GZ_URL=http://downloads.mysql.com/docs/fill_help_tables-5.7.sql
 SAKILA_DB_TAR_GZ_URL=http://downloads.mysql.com/docs/sakila-db.tar.gz
 SAKILA_SPATIAL_DB_TAR_GZ_URL=http://downloads.mysql.com/docs/sakila-spatial-db.tar.gz
 WORLD_SQL_GZ_URL=http://downloads.mysql.com/docs/world.sql.gz
+# unable to download:
 #MENAGERIE_DB_TAR_GZ_URL=http://downloads.mysql.com/docs/menagerie-db.tar.gz
 
 EMPLOYEES_DB_CODE_TAR_BZ2=$(shell basename ${EMPLOYEES_DB_CODE_TAR_BZ2_URL})
@@ -66,10 +69,10 @@ SQLS+= ${EMPLOYEES_DB_DUMP_FILES_LOADED}
 all:	${SQLS}
 
 %.tar: %.tar.gz
-	-gunzip -c $< >$@
+	gunzip -c $< >$@
 
 %.tar: %.tar.bz2
-	-bunzip2 -c $< >$@
+	bunzip2 -c $< >$@
 
 %.loaded: %.sql
 	${MYSQL} <$<
@@ -106,38 +109,38 @@ ${SAKILA_SPATIAL_DB_TAR_GZ}:
 
 
 ${FILL_HELP_TABLES}: ${FILL_HELP_TABLES_GZ}
-	-gunzip -c $< >$@
+	gunzip -c $< >$@
 
 ${EMPLOYEES_DB_CODE_TAR}:	${EMPLOYEES_DB_CODE_TAR_BZ2}
-	-bunzip2 -c $< >$@
+	bunzip2 -c $< >$@
 
 ${EMPLOYEES_DB_DUMP_FILES_TAR}:	${EMPLOYEES_DB_DUMP_FILES_TAR_BZ2}
-	-bunzip2 -c $< >$@
+	bunzip2 -c $< >$@
 
 ${WORLD_SQL}: ${WORLD_SQL_GZ}
-	-gunzip -c $< >$@
+	gunzip -c $< >$@
 
 ${SAKILA_DB_TAR}:	${SAKILA_DB_TAR_GZ}
-	-gunzip -c $< >$@
+	gunzip -c $< >$@
 
 ${SAKILA_SPATIAL_DB_TAR}: ${SAKILA_SPATIAL_DB_TAR_GZ}
-	-gunzip -c $< >$@
+	gunzip -c $< >$@
 
 
 ${EMPLOYEES_DB_CODE}:	${EMPLOYEES_DB_CODE_TAR}
-	-tar -xvf $<
+	tar -xvf $<
 	touch $@
 
 ${EMPLOYEES_DB_DUMP_FILES}:	${EMPLOYEES_DB_DUMP_FILES_TAR}
-	-tar -xvf $<
+	tar -xvf $<
 	touch $@
 
 ${SAKILA_DB}:	${SAKILA_DB_TAR}
-	-tar -xvf $<
+	tar -xvf $<
 	touch $@
 
 ${SAKILA_SPATIAL_DB}: ${SAKILA_SPATIAL_DB_TAR}
-	-tar -xvf $<
+	tar -xvf $<
 	touch $@
 
 
