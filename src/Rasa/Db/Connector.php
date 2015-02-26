@@ -198,7 +198,7 @@ class Rasa_Db_Connector
       $map = array_flip(self::$_application_ini_map);
 
       foreach ($params as $k => $v) {
-          if (preg_match('/resources\.db\.(.*)$/i', $k, $m)) {
+          if (preg_match('/resources\.db\.params\.(.*)$/i', $k, $m)) {
               $key = $m[1];
               if (isset($map[$key])) {
                   $rv[$map[$key]] = $v;
