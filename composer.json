@@ -37,7 +37,6 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "ext-curl": "*",
         "pear/ole": "dev-master",
         "pear/spreadsheet_excel_writer": "dev-master"
     },
