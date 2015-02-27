@@ -14,6 +14,8 @@ chmod 600 app/configs/dbconfig.ini
 vi app/configs/dbconfig.ini # add your database credentials
 composer install
 ````
+For the SQL scripts in [www/test-reports](www/test-reports) to work, the MySQL user will need to have
+CREATE/INSERT/DROP rights on the `test` database. The database does not need to be created beforehand.
 
 Lastly, set up your web server to point to `sqlseer/www`. For example, with Apache 2.3 or earlier, use:
 
@@ -50,7 +52,16 @@ To load the MySQL [employee][], [sakila][] and [world][] sample databases, insta
 
 ````bash
 cd sample_data
-make
+make MYSQL_OPTS="-u user -ppassword"
+make distclean
+````
+
+where `user` is the MySQL username, and `password` is that user's password.
+
+To remove the employee, sakila, and world databases, type:
+
+````bash
+make drop MYSQL_OPTS="-u user -ppassword"
 ````
 
 ### Export Formats

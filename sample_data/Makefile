@@ -4,6 +4,7 @@
 
 WGET?=wget --no-check-certificate --tries 99999
 MYSQL?=mysql
+MYSQL+= ${MYSQL_OPTS}
 
 EMPLOYEES_DB_CODE_TAR_BZ2_URL=https://launchpadlibrarian.net/24493350/employees_db-code-1.0.6.tar.bz2
 EMPLOYEES_DB_DUMP_FILES_TAR_BZ2_URL=https://launchpadlibrarian.net/24493789/employees_db-dump-files-1.0.5.tar.bz2
