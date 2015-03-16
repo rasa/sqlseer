@@ -2,26 +2,26 @@
 
 CREATE DATABASE IF NOT EXISTS temp; /*autorun=true*/
 
-DROP TABLE IF EXISTS temp.test_report_dates;
+DROP TABLE IF EXISTS temp.test_report_group_by;
 
-CREATE TABLE temp.test_report_dates
+CREATE TABLE temp.test_report_group_by
 (
   dt DATETIME,
   dummy INT UNSIGNED
 );
 
-INSERT INTO temp.test_report_dates SET dt = NOW() - INTERVAL RAND() * 86400 * 365 SECOND, dummy = RAND() * 65536;
+INSERT INTO temp.test_report_group_by SET dt = NOW() - INTERVAL RAND() * 86400 * 365 SECOND, dummy = RAND() * 65536;
 
-INSERT INTO temp.test_report_dates SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_dates; -- 2
-INSERT INTO temp.test_report_dates SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_dates; -- 4
-INSERT INTO temp.test_report_dates SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_dates; -- 8
-INSERT INTO temp.test_report_dates SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_dates; -- 16
-INSERT INTO temp.test_report_dates SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_dates; -- 32
-INSERT INTO temp.test_report_dates SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_dates; -- 64
-INSERT INTO temp.test_report_dates SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_dates; -- 128
-INSERT INTO temp.test_report_dates SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_dates; -- 256
-INSERT INTO temp.test_report_dates SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_dates; -- 512
-INSERT INTO temp.test_report_dates SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_dates; -- 1024
+INSERT INTO temp.test_report_group_by SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_group_by; -- 2
+INSERT INTO temp.test_report_group_by SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_group_by; -- 4
+INSERT INTO temp.test_report_group_by SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_group_by; -- 8
+INSERT INTO temp.test_report_group_by SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_group_by; -- 16
+INSERT INTO temp.test_report_group_by SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_group_by; -- 32
+INSERT INTO temp.test_report_group_by SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_group_by; -- 64
+INSERT INTO temp.test_report_group_by SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_group_by; -- 128
+INSERT INTO temp.test_report_group_by SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_group_by; -- 256
+INSERT INTO temp.test_report_group_by SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_group_by; -- 512
+INSERT INTO temp.test_report_group_by SELECT NOW() - INTERVAL RAND() * 86400 * 365 SECOND AS dt, RAND() * 65536 AS dummy FROM temp.test_report_group_by; -- 1024
 
 SELECT /*autorun=true*/
   DATE_FORMAT(dt, /*groupby=*/'%Y-%m-%d') AS dt,
@@ -43,6 +43,6 @@ SELECT /*autorun=true*/
   VAR_SAMP(dummy) AS 'var_samp', -- Return the sample variance
   VARIANCE(dummy) AS 'variance' -- Return the population standard variance
 FROM
-  temp.test_report_dates t
+  temp.test_report_group_by t
 GROUP BY 1
 ORDER BY 1;
