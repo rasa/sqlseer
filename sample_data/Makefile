@@ -147,6 +147,9 @@ ${SAKILA_DB_LOADED}:	${SAKILA_DB}
 
 ${SAKILA_SPATIAL_DB_LOADED}:	${SAKILA_SPATIAL_DB}
 	sed -i -e 's/ sakila/ sakila_spatial/i' $<
+	-if [[ $(shell ${MYSQL} -B -N -e "SELECT CONCAT(LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(VERSION(),'-',1),'.',1),2,'0'),LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(VERSION(),'-',1),'.',-2),'.',1),2,'0'),LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(VERSION(),'-',1),'.',-1),2,'0'))") -lt 050704 ]]; then \
+		sed -i -e 's/ENGINE=InnoDB/ENGINE=MyISAM/i' $< ;\
+	fi
 	${MYSQL} < $<
 	touch $@
 
