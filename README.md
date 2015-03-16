@@ -1,6 +1,7 @@
-# SqlSeer [![Flattr this][flatter_png]][flatter]
+# Sqlseer [![Flattr this][flatter_png]][flatter]
 
-Simple, yet powerful, MySQL report generator. Reports can be saved to .csv, .html, .txt, .xls, and .xml formats.
+Simple, yet powerful, MySQL report generator. Reports can be saved to .csv, .html, .txt, .xls, and .xml formats. A demo of Sqlseer is at http://sqlseer.smithii.com/
+
 
 ## Quick Start
 
