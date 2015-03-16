@@ -10,10 +10,16 @@ First, install any [dependencies](#dependencies) that are needed. Then, install 
 git clone https://github.com/rasa/sqlseer
 cd sqlseer
 cp app/configs/dbconfig.ini.example app/configs/dbconfig.ini
-chmod 600 app/configs/dbconfig.ini
 vi app/configs/dbconfig.ini # add your database credentials
 composer install
 ````
+To secure your database credentials, run:
+````bash
+chmod 640 app/configs/dbconfig.ini
+chgrp www-data app/configs/dbconfig.ini 
+````
+replacing `www-data` with the group of your web server.
+
 For the SQL scripts in [www/test-reports](www/test-reports) to work, the MySQL user will need to have
 CREATE/INSERT/DROP rights on the `test` database. The database does not need to be created beforehand.
 
