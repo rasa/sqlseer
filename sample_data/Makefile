@@ -177,7 +177,7 @@ ${SAKILA_SPATIAL_DB_DATA_LOADED}: ${SAKILA_SPATIAL_DB_DATA} ${SAKILA_SPATIAL_DB_
 
 
 clean:
-	-rm -fr *.sql *.tar *.loaded employees_db menagerie-db sakila-db sakila-spatial-db
+	-rm -fr world.sql *.tar *.loaded employees_db menagerie-db sakila-db sakila-spatial-db
 
 .PHONY: clean
 
