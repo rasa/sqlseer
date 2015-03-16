@@ -1,7 +1,8 @@
 *.bz2
 *.gz
 *.loaded
-*.sql
 *.tar
 employees_db/
 sakila-db/
+sakila-spatial-db/
+world.sql
