@@ -145,9 +145,11 @@ ${SAKILA_DB_LOADED}:	${SAKILA_DB}
 	${MYSQL} < $<
 	touch $@
 
+MYSQL_VERSION=$(shell ${MYSQL} -B -N -e "SELECT CONCAT(LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(VERSION(),'-',1),'.',1),2,'0'),LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(VERSION(),'-',1),'.',-2),'.',1),2,'0'),LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(VERSION(),'-',1),'.',-1),2,'0'))")
+
 ${SAKILA_SPATIAL_DB_LOADED}:	${SAKILA_SPATIAL_DB}
 	sed -i -e 's/ sakila/ sakila_spatial/i' $<
-	-if [[ $(shell ${MYSQL} -B -N -e "SELECT CONCAT(LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(VERSION(),'-',1),'.',1),2,'0'),LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(VERSION(),'-',1),'.',-2),'.',1),2,'0'),LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(VERSION(),'-',1),'.',-1),2,'0'))") -lt 050704 ]]; then \
+	-if [ "${MYSQL_VERSION}" -lt 050704 ]; then \
 		sed -i -e 's/ENGINE=InnoDB/ENGINE=MyISAM/i' $< ;\
 	fi
 	${MYSQL} < $<
@@ -161,7 +163,7 @@ ${WORLD_SQL_LOADED}: ${WORLD_SQL}
 
 
 ${EMPLOYEES_DB_CODE_LOADED}:	${EMPLOYEES_DB_CODE} ${EMPLOYEES_DB_DUMP_FILES}
-	-if [[ $(shell ${MYSQL} -B -N -e "SELECT CONCAT(LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(VERSION(),'-',1),'.',1),2,'0'),LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(VERSION(),'-',1),'.',-2),'.',1),2,'0'),LPAD(SUBSTRING_INDEX(SUBSTRING_INDEX(VERSION(),'-',1),'.',-1),2,'0'))") -ge 050503 ]]; then \
+	-if [ "${MYSQL_VERSION}" -ge 050503 ]; then \
 		sed -i -e 's/storage_engine/default_storage_engine/i' $< ;\
 	fi
 	cd employees_db ;\
