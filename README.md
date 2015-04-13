@@ -23,7 +23,13 @@ chgrp www-data app/configs/dbconfig.ini
 replacing `www-data` with the group of your web server.
 
 For the SQL scripts in [www/test-reports](www/test-reports) to work, the MySQL user will need to have
-CREATE/INSERT/DROP rights on the `test` database. The database does not need to be created beforehand.
+CREATE/INSERT/DROP rights on the `test` database. The database does not need to be created beforehand. 
+
+One way to do this, is via the [sample_data/create-sqlseer-user.sql](sample_data/create-sqlseer-user.sql) script:
+````bash
+cd sample_data
+mysql -uuser -ppassword <create-sqlseer-user.sql
+````
 
 Lastly, set up your web server to point to `sqlseer/www`. For example, with Apache 2.3 or earlier, use:
 
