@@ -7,15 +7,19 @@
  */
 
 $insert_rand = <<<EOT
-
 INSERT INTO
   temp.test_report_fulltext
 SET
-  tinytexts   = MAKE_SET(RAND()*128+1,"search","terms","randomly","selected","for","your","searching","amusement"),
-  mediumtexts = MAKE_SET(RAND()*128+1,"search","terms","randomly","selected","for","your","searching","amusement"),
-  longtexts   = MAKE_SET(RAND()*128+1,"search","terms","randomly","selected","for","your","searching","amusement"),
-  comment = "\"for\" and \"your\" are unsearchable \"stop words\""
+  tinytexts   = MAKE_SET(RAND()*256+1,"search","terms","randomly","selected","for","your","searching","amusement"), 
+  mediumtexts = MAKE_SET(RAND()*256+1,"search","terms","randomly","selected","for","your","searching","amusement"), 
+  longtexts   = MAKE_SET(RAND()*256+1,"search","terms","randomly","selected","for","your","searching","amusement"), 
+  comment = "\"for\" and \"your\" are unsearchable \"stop words\"";
+
 EOT;
+
+$rows = isset($_REQUEST['rows']) ? $_REQUEST['rows'] : 30;
+
+$inserts = str_repeat($insert_rand, $rows);
 
 $sql = <<<EOT
 
@@ -34,36 +38,7 @@ CREATE TABLE IF NOT EXISTS temp.test_report_fulltext
   FULLTEXT (longtexts)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
-$insert_rand;
+$inserts;
 
 SELECT /*autorun=true*/
   t.*
