@@ -6,8 +6,6 @@ SET @@sql_mode=REPLACE(@@sql_mode, 'NO_ZERO_IN_DATE', '');
 SET @@sql_mode=REPLACE(@@sql_mode, 'STRICT_TRANS_TABLES', '');
 SET @@sql_mode=REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', '');
 
-SELECT @@sql_mode;
-
 CREATE DATABASE IF NOT EXISTS temp; /*autorun=true*/
 
 DROP TABLE IF EXISTS temp.test_report_dates;

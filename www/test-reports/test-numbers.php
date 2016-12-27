@@ -1,8 +1,9 @@
 <?php
+
 /**
  * Rasa Framework
  *
- * @copyright Copyright (c) 2010-2015 Ross Smith II (http://smithii.com)
+ * @copyright Copyright (c) 2010-2016 Ross Smith II (http://smithii.com)
  * @license   MIT License (http://opensource.org/licenses/MIT)
  */
 
@@ -26,6 +27,8 @@ FROM
 EOT;
 
 $sql = <<<EOT
+
+SET @@sql_mode=REPLACE(@@sql_mode, 'STRICT_TRANS_TABLES', '');
 
 CREATE DATABASE IF NOT EXISTS temp;
 
