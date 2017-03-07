@@ -2,7 +2,7 @@
 /**
  * Rasa Framework
  *
- * @copyright Copyright (c) 2010-2015 Ross Smith II (http://smithii.com)
+ * @copyright Copyright (c) 2010-2017 Ross Smith II (http://smithii.com)
  * @license   MIT License (http://opensource.org/licenses/MIT)
  */
 
@@ -38,7 +38,6 @@
  *    password: MYSQL_PWD
  *    port:     MYSQL_TCP_PORT
  *    socket:   MYSQL_UNIX_PORT
- *    user:     USER
  *    user:     MYSQL_USER
  *
  * 6. Command line parameters:
@@ -277,7 +276,6 @@ class Rasa_Db_Connector
               'MYSQL_HOST' => 'host',
               'MYSQL_TCP_PORT' => 'port',
               'MYSQL_UNIX_PORT' => 'socket',
-              'USER' => 'user',
               'MYSQL_USER' => 'user',
               'MYSQL_PWD' => 'password'
           );
