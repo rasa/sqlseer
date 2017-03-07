@@ -2,7 +2,7 @@
 /**
  * Rasa Framework
  *
- * @copyright Copyright (c) 2010-2015 Ross Smith II (http://smithii.com)
+ * @copyright Copyright (c) 2010-2017 Ross Smith II (http://smithii.com)
  * @license   MIT License (http://opensource.org/licenses/MIT)
  */
 
@@ -81,7 +81,7 @@ foreach ($files as $file) {
   $date = date('Y-m-d H:i:s', $mtime);
 
   if (isset($_REQUEST['sort']) && $_REQUEST['sort']) {
-    $key = $$_REQUEST['sort'];
+    $key = ${$_REQUEST['sort']};
     if ($_REQUEST['sort'] <> 'name') {
       $key .= $name;
     }
