@@ -2,7 +2,7 @@
 /**
  * Rasa Framework
  *
- * @copyright Copyright (c) 2010-2015 Ross Smith II (http://smithii.com)
+ * @copyright Copyright (c) 2010-2017 Ross Smith II (http://smithii.com)
  * @license   MIT License (http://opensource.org/licenses/MIT)
  */
 
@@ -10,28 +10,28 @@ $insert_rand = <<<EOT
 INSERT INTO
   temp.test_report_all
 SELECT
-  CAST(bits + 10 + RAND() AS DECIMAL(10,4)),
-  CAST(tinyints + 10 + RAND() AS DECIMAL(10,4)),
-  CAST(smallints + 10 + RAND() AS DECIMAL(10,4)),
-  CAST(mediumints + 10 + RAND() AS DECIMAL(10,4)),
-  CAST(bigints + 10 + RAND() AS DECIMAL(10,4)),
-  doubles + 10 + RAND(),
-  CAST(decimals + 10 + RAND() AS DECIMAL(10,4)),
+  IF(bits+0b1>0b1,0b0,0b1),
+  CAST(tinyints + RAND() AS DECIMAL(10,4)),
+  CAST(smallints + RAND() AS DECIMAL(10,4)),
+  CAST(mediumints + RAND() AS DECIMAL(10,4)),
+  CAST(bigints + RAND() AS DECIMAL(10,4)),
+  doubles + RAND(),
+  CAST(decimals + RAND() AS DECIMAL(10,4)),
   CURDATE() - INTERVAL RAND() * 12345 DAY,
   TIME(NOW() - INTERVAL RAND() * 86400 SECOND),
   NOW() - INTERVAL RAND() * 12345 DAY - INTERVAL RAND() * 86400 SECOND,
   NOW() - INTERVAL RAND() * 12345 DAY - INTERVAL RAND() * 86400 SECOND,
   YEAR(NOW() + INTERVAL 50 YEAR - INTERVAL RAND() * 99 YEAR),
-  CAST(chars + 10 + RAND() AS DECIMAL(10,4)),
-  CAST(varchars + 10 + RAND() AS DECIMAL(10,4)),
-  CAST(binarys + 10 + RAND() AS DECIMAL(10,4)),
-  CAST(varbinarys + 10 + RAND() AS DECIMAL(10,4)),
-  CAST(tinyblobs + 10 + RAND() AS DECIMAL(10,4)),
-  CAST(mediumblobs + 10 + RAND() AS DECIMAL(10,4)),
-  CAST(longblobs + 10 + RAND() AS DECIMAL(10,4)),
-  CAST(tinytexts + 10 + RAND() AS DECIMAL(10,4)),
-  CAST(mediumtexts + 10 + RAND() AS DECIMAL(10,4)),
-  CAST(longtexts + 10 + RAND() AS DECIMAL(10,4)),
+  CAST(ROUND(chars + RAND(), 0) MOD 256 AS CHAR(1)),
+  CAST(ROUND(varchars + RAND(), 0) MOD 256 AS CHAR(1)),
+  CAST(ROUND(binarys + RAND(), 0) MOD 256 AS BINARY(1)),
+  CAST(ROUND(varbinarys + RAND(), 0) MOD 256 AS BINARY(1)),
+  CAST(tinyblobs + RAND() AS DECIMAL(10,4)),
+  CAST(mediumblobs + RAND() AS DECIMAL(10,4)),
+  CAST(longblobs + RAND() AS DECIMAL(10,4)),
+  CAST(tinytexts + RAND() AS DECIMAL(10,4)),
+  CAST(mediumtexts + RAND() AS DECIMAL(10,4)),
+  CAST(longtexts + RAND() AS DECIMAL(10,4)),
   ELT(FLOOR(1+RAND()*3), 'a', 'b', 'c'),
   ELT(FLOOR(1+RAND()*7), 'a', 'b', 'c','a,b','a,c','b,c','a,b,c'),
   CAST(ROUND(RAND() * 123456789012345, 0) AS CHAR(20))
@@ -40,6 +40,8 @@ FROM
 EOT;
 
 $sql = <<<EOT
+
+SET time_zone = '+00:00';
 
 CREATE DATABASE IF NOT EXISTS temp;
 
@@ -77,7 +79,7 @@ CREATE TABLE temp.test_report_all
 INSERT INTO
   temp.test_report_all
 SET
-  bits = 0,
+  bits = 0b0,
   tinyints = 0,
   smallints = 0,
   mediumints = 0,
@@ -125,3 +127,4 @@ EOT;
 require_once $_SERVER['DOCUMENT_ROOT'] . '/_runsql.php';
 
 # EOF
+
