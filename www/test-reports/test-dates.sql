@@ -20,8 +20,7 @@ CREATE TABLE temp.test_report_dates
   i INT DEFAULT 1 --
 );
 
--- SET GLOBAL  time_zone = '+00:00';
-SET SESSION time_zone = @@global.time_zone;
+SET time_zone = '+00:00';
 
 SET @date = '0000-00-00';
 SET @time = '00:00:00';
@@ -69,6 +68,22 @@ SET @date = '1970-01-01';
 SET @time = '08:00:00';
 INSERT INTO temp.test_report_dates SET dates = @date , times = @time, timestamps = CONCAT(@date, ' ', @time), datetimes = CONCAT(@date, ' ', @time), years = YEAR(@date);
 
+SET @date = '2017-03-12';
+SET @time = '01:30:00';
+INSERT INTO temp.test_report_dates SET dates = @date , times = @time, timestamps = CONCAT(@date, ' ', @time), datetimes = CONCAT(@date, ' ', @time), years = YEAR(@date);
+
+SET @date = '2017-03-12';
+SET @time = '10:30:00';
+INSERT INTO temp.test_report_dates SET dates = @date , times = @time, timestamps = CONCAT(@date, ' ', @time), datetimes = CONCAT(@date, ' ', @time), years = YEAR(@date);
+
+SET @date = '2017-11-05';
+SET @time = '09:30:00';
+INSERT INTO temp.test_report_dates SET dates = @date , times = @time, timestamps = CONCAT(@date, ' ', @time), datetimes = CONCAT(@date, ' ', @time), years = YEAR(@date);
+
+SET @date = '2017-11-05';
+SET @time = '01:30:00';
+INSERT INTO temp.test_report_dates SET dates = @date , times = @time, timestamps = CONCAT(@date, ' ', @time), datetimes = CONCAT(@date, ' ', @time), years = YEAR(@date);
+
 SET @date = CURDATE();
 SET @time = CURTIME();
 INSERT INTO temp.test_report_dates SET dates = @date , times = @time, timestamps = CONCAT(@date, ' ', @time), datetimes = CONCAT(@date, ' ', @time), years = YEAR(@date);
@@ -111,7 +126,7 @@ SET @date = '9999-12-31';
 SET @time = '23:59:59';
 INSERT INTO temp.test_report_dates SET dates = @date , times = @time, timestamps = CONCAT(@date, ' ', @time), datetimes = CONCAT(@date, ' ', @time), years = YEAR(@date);
 
-SELECT /*autorun=true*/
+SELECT /*autorun=false*/
   DATE_FORMAT(t.datetimes, /*groupby=*/'%Y-%m-%d') AS groupby,
   t.dates,
   t.times,
