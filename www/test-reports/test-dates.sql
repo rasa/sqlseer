@@ -20,7 +20,7 @@ CREATE TABLE temp.test_report_dates
   i INT DEFAULT 1 --
 );
 
-SET time_zone = '+00:00';
+-- SET time_zone = '+00:00';
 
 SET @date = '0000-00-00';
 SET @time = '00:00:00';
@@ -68,12 +68,16 @@ SET @date = '1970-01-01';
 SET @time = '08:00:00';
 INSERT INTO temp.test_report_dates SET dates = @date , times = @time, timestamps = CONCAT(@date, ' ', @time), datetimes = CONCAT(@date, ' ', @time), years = YEAR(@date);
 
-SET @date = '2017-03-12';
-SET @time = '01:30:00';
+SET @date = '2011-03-13';
+SET @time = '02:30:00';
 INSERT INTO temp.test_report_dates SET dates = @date , times = @time, timestamps = CONCAT(@date, ' ', @time), datetimes = CONCAT(@date, ' ', @time), years = YEAR(@date);
 
 SET @date = '2017-03-12';
-SET @time = '10:30:00';
+SET @time = '02:30:00';
+INSERT INTO temp.test_report_dates SET dates = @date , times = @time, timestamps = CONCAT(@date, ' ', @time), datetimes = CONCAT(@date, ' ', @time), years = YEAR(@date);
+
+SET @date = '2017-03-12';
+SET @time = '11:30:00';
 INSERT INTO temp.test_report_dates SET dates = @date , times = @time, timestamps = CONCAT(@date, ' ', @time), datetimes = CONCAT(@date, ' ', @time), years = YEAR(@date);
 
 SET @date = '2017-11-05';
@@ -133,7 +137,9 @@ SELECT /*autorun=false*/
   t.timestamps,
   t.datetimes,
   t.years,
-  SUM(t.i) AS sum_of_i
+  SUM(t.i) AS sum_of_i,
+  CONCAT(DATE_FORMAT(t.timestamps, '%Y-%m-%d %H:%i:%S '), @@system_time_zone) AS timestamps_,
+  CONCAT(DATE_FORMAT(t.datetimes, '%Y-%m-%d %H:%i:%S '), @@system_time_zone) AS datetimes_
 FROM
   temp.test_report_dates t
 GROUP BY 1
