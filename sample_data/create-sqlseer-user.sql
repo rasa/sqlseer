@@ -41,7 +41,7 @@ CONV(LEFT(SHA1(UUID()),8),16,36),
 CONV(LEFT(SHA1(UUID()),8),16,36),
 CONV(LEFT(SHA1(UUID()),8),16,36));
 
-UPDATE mysql.user SET password = PASSWORD(@password) WHERE user = 'sqlseer';
+UPDATE mysql.user SET authentication_string = PASSWORD(@password) WHERE user = 'sqlseer';
 
 FLUSH PRIVILEGES;
 
